@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="prescription_view_form" model='ir.ui.view'>
+        <field name="name">prescription.form</field>
+        <field name="model">hms.prescription</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                            invisible="state not in ('draft')" class="btn-primary"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state not in ('confirm')" class="btn-primary"/>
+                    <button name="action_create_invoice" string="Create Invoice" type="object"
+                            class="btn-primary"/>
+                    <button name="action_create_delivery" string="Delivery" type="object"
+                            class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,cancel"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="view_prescription" class="oe_start_button" icon="fa-solid fa-calendar" >
+                            <field string="Prescription" name="prescription_lines" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_show_delivery" class="oe_stat_button" icon="fa-solid fa-truck" >
+                            <field string="Delivery" name="picking_ids" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="doctor_id"/>
+                            <field name="date"/>
+                            <field name="medicines"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Prescription Lines">
+                            <field name="prescription_lines"/>
+                            <group>
+                                <group class="oe_subtotal_footer d-flex order-0 order-lg-1 flex-column gap-0 gap-sm-3" colspan="2" >
+                                    <field name="total_amount"   readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="prescription_view_list" model="ir.ui.view">
+        <field name="name">prescription.list</field>
+        <field name="model">hms.prescription</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="patient_id"/>
+                <field name="date"/>
+                <field name="total_amount"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="prescription_action" model="ir.actions.act_window">
+        <field name="name">Prescription</field>
+        <field name="res_model">hms.prescription</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_bista_hms" name="HMS"/>
+    <menuitem id="menu_prescription_sub" name="Prescription" parent="menu_bista_hms" action="prescription_action"/>
+
+</odoo>

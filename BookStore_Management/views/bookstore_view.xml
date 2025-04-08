@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="book_list_view" model="ir.ui.view">
+        <field name="name">book.list.view</field>
+        <field name="model">book.details</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="isbn"/>
+                <field name="title"/>
+                <field name="price"/>
+                <field name="books_author"/>
+                <field name="publish_date"/>
+                <field name="stock_qty"/>
+                <field name="rating"/>
+                <field name="books_genre"/>
+                <field name="books_publisher"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="book_form_view" model="ir.ui.view">
+        <field name="name">book.form.view</field>
+        <field name="model">book.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_book_wizard" string="Update Data" type="object" class="btn-primary"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="title" placeholder="Book Title"/>
+                        <field name="price"/>
+                        <field name="rating" placeholder="Rating"/>
+                    </group>
+                    <group>
+                        <field name="books_genre"/>
+                        <field name="is_avail"/>
+                        <field name="books_author" placeholder="Author Name"/>
+                    </group>
+                </group>
+
+                <notebook>
+                    <page string="Other Details">
+                        <group>
+                            <field name="isbn"/>
+                            <field name="publish_date"/>
+                            <field name="stock_qty"/>
+                            <field name="order_books"/>
+                        </group>
+                    </page>
+                    <page string="Description">
+                        <field name="description"/>
+                    </page>
+                    <page string="User">
+                        <field name="users_users"/>
+                    </page>
+                </notebook>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="book_action" model="ir.actions.act_window">
+        <field name="name">Books</field>
+        <field name="res_model">book.details</field>
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+
+    <menuitem id="book_root_menu" name="Book Store Management"/>
+
+    <menuitem id="book_menu" name="Book"
+    parent="book_root_menu"
+    action="book_action"/>
+<!--    <menuitem id="author_child" name="Author" parent="bookstore_root_menu" action="author_action"/>-->
+<!--    <menuitem id="genre_child" name="Genre" parent="bookstore_root_menu" action="genre_action"/>-->
+<!--    <menuitem id="publisher_child" name="Publisher" parent="bookstore_root_menu" action="publisher_action"/>-->
+<!--    <menuitem id="customer_child" name="Customer" parent="bookstore_root_menu" action="customer_action"/>-->
+<!--    <menuitem id="order_child" name="Order" parent="bookstore_root_menu" action="order_action"/>-->
+<!--    <menuitem id="orderliness_child" name="OrderLines" parent="bookstore_root_menu" action="orderliness_action"/>-->
+</odoo>

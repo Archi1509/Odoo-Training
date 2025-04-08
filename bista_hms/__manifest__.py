@@ -1,0 +1,32 @@
+{
+    'name':'Bista HMS',
+    'version':'0.1',
+    'author':'Bista Solutions Pvt.Ltd',
+    'summery':'App to Manage Hospital',
+    "description": """this app will help to manage hospital""",
+    'sequence':-1,
+    'category':'Management',
+    'depends':['base','product','sale','sale_stock','account','mail'],
+    'data':[
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'data/ir_cron.xml',
+        'data/ir_cron_2.xml',
+        'data/ir_sequence.xml',
+        'data/ir_appointment_sequence.xml',
+        'data/send_mail_template.xml',
+        'views/res_patient_view.xml',
+        'views/appointment_view.xml',
+        'views/doctor_view.xml',
+        'views/specialization_view.xml',
+        'views/hospital_view.xml',
+        'views/prescription_view.xml',
+        'views/prescriptionline_view.xml',
+        'views/sale_order_view.xml',
+        'views/res_patner_view.xml',
+        'views/stock_picking_view.xml'
+        ],
+    'installable':True,
+    'license':'OEEL-1'
+
+}

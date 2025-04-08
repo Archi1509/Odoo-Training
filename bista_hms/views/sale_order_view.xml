@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_order_form_inherit_ref" model="ir.ui.view">
+        <field name="name">sale.order.form.inh</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="lead_reference"/>
+            </field>
+            <xpath expr="//field[@name='order_line']//list/field[@name='product_uom_qty']" position="before">
+                <field name="warehouse_quantity"/>
+                <field name="quantity_location_sum"/>
+                <field name="location_ids" widget="many2many_tags"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="after">
+                <field name="previous_price"/>
+            </xpath>
+            <!--<xpath expr="//group[@name='sale_shipping']/field[@name='warehouse_id']" position="after">
+
+            </xpath> -->
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="rma_wizard_form" model="ir.ui.view">
+            <field name="name">rma.wizard.form</field>
+            <field name="model">rma.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="sale_order_quantity"/>
+                            <field name="quantity"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_process" type="object" class="btn-primary" string="Process"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

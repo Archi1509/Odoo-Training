@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="author_list_view" model="ir.ui.view">
+        <field name="name">author.list.view</field>
+        <field name="model">author.details</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="email"  widget="email" />
+                <field name="contact" />
+                <field name="age"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="author_form_view" model="ir.ui.view">
+        <field name="name">author.form.view</field>
+        <field name="model">author.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Author">
+                    <field name="name" />
+                    <field name="email"  widget="email" />
+                    <field name="contact" />
+                    <field name="age" />
+                </group>
+                <notebook>
+                    <page string="Books">
+                        <field name="author_books" />
+
+                    </page>
+                    <page string="Author">
+                        <field name="biography" placeholder="About the Author"/>
+                    </page>
+                </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+   <record id="author_action" model="ir.actions.act_window">
+        <field name="name">Author</field>
+        <field name="res_model">author.details</field>
+        <field name="view_mode">list,form</field>
+   </record>
+
+
+    <menuitem id="book_root_menu" name="Book Store Management"/>
+    <menuitem id="author_menu" name="Author"
+    parent="book_root_menu"
+    action="author_action"/>
+
+</odoo>

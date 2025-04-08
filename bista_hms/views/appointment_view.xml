@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="hms_appointment_list_view" model="ir.ui.view">
+        <field name="name">hms.appointment</field>
+        <field name="model">hms.appointment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="appointment_code"/>
+                <field name="patient_id"/>
+                <field name="appointment_date"/>
+                <field name="appointment_reason"/>
+                <field name="phone"/>
+            </list>
+
+        </field>
+    </record>
+
+    <record id="hms_appointment_form_view" model="ir.ui.view">
+        <field name="name">hms.appointment</field>
+        <field name="model">hms.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Appointment">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                            invisible="state not in ('draft')" class="btn-primary"/>
+                    <button name="action_waiting" string="Waiting" type="object"
+                            invisible="state not in ('confirm')" class="btn-primary"/>
+                    <button name="action_in_consultation" string="In Consultation" type="object"
+                            invisible="state not in ('waiting')" class="btn-primary"/>
+                    <button name="action_done" string="Done" type="object"
+                            invisible="state not in ('in_consultation')" class="btn-primary"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                            invisible="state not in ('in_consultation','waiting')" class="btn-primary"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,in_consultation,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="appointment_code" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id" />
+                            <field name="appointment_date"/>
+                            <field name="appointment_reason"/>
+                            <field name="phone"/>
+                            <field name="product" domain="[('type', '=', 'service')]"/>
+                        </group>
+                        <group>
+                            <field name="guardian_id"/>
+                            <field name="guardian_type"/>
+                        </group>
+                        <group >
+                            <field name="consultation_start" invisible="state in ('draft','confirm')" />
+                            <field name="consultation_end" invisible="state in ('draft','confirm')"/>
+                            <field name="total_time" invisible="state in ('draft','confirm','in_consultation') " compute='_calculate_total_time' />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+
+    <record id="hms_appointment_action" model="ir.actions.act_window">
+        <field name="name">Appointment</field>
+        <field name="res_model">hms.appointment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_bista_hms" name="HMS"/>
+    <menuitem id="menu_hms_appointment_sub" name="Appointment" parent="menu_bista_hms" action="hms_appointment_action"/>
+</odoo>

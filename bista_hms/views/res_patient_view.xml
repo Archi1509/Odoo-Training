@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_patient_view_form" model='ir.ui.view'>
+        <field name="name">res.patient.view.form</field>
+        <field name="model">res.patient</field>
+        <field name="arch" type="xml">
+            <form string="patient">
+                <header>
+                    <button name="action_open_appointments" string="Appointments" type="object" />
+                    <button name="block_user" string="Block" type="object" invisible="state in ['block']"/>
+                    <button name="unblock_user" string="UnBlock" type="object" invisible="state in ['unblock']"/>
+<!--                    <button name="calculate_age" string="Calculate Age" type="object" readonly="1" />-->
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_get_appointment_count" class="oe_start_button" icon="fa-solid fa-calendar" >
+                            <field string="Appointment" name="appointment_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="patient_code" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="date_of_birth"/>
+                            <field name="mobile"/>
+                            <field name="weekly_visit"/>
+                        </group>
+                        <group>
+                            <field name="blood_group"/>
+                            <field name="previous_diseases"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="age_category"/>
+                        </group>
+                        <group>
+                            <field name="guardian_id" required="age_category in ['child','minor']" invisible="age_category in ['adult','senior']"/>
+                            <field name="guardian_type" required="age_category in ['child','minor']" invisible="age_category in ['adult','senior']"/>
+                            <field name="partner_id"/>
+                            <field name="is_blocked"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page>
+                            <field name="appointment_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_res_patient_list" model="ir.ui.view">
+        <field name="name">res.patient.list</field>
+        <field name="model">res.patient</field>
+        <field name="arch" type="xml">
+            <list string="Patients">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="partner_id"/>
+                <field name="email"/>
+                <field name="mobile"/>
+                <field name="blood_group"/>
+                <field name="date_of_birth"/>
+                <field name="age"/>
+                <field name="previous_diseases"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="res_patient_action" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">res.patient</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_bista_hms" name="HMS"/>
+    <menuitem id="menu_res_patient_sub" name="Patients" parent="menu_bista_hms" action="res_patient_action"/>
+
+</odoo>

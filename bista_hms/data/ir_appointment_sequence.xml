@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="sequence_hms_appointment" model="ir.sequence">
+        <field name="name">hms.appointment</field>
+        <field name="code">hms.appointment</field>
+        <field name="prefix">AP-</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>

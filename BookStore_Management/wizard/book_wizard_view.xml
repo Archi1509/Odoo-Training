@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="book_wizard_wizard" model="ir.ui.view">
+            <field name="name">book.wizard.form</field>
+            <field name="model">book.wizard.view</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="title"/>
+                        <field name="price"/>
+                        <field name="isbn"/>
+                        <field name="stock_qty"/>
+                        <field name="rating"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+<!--        <record id="book_wizard_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Book Wizard</field>-->
+<!--            <field name="res_model">book.wizard.view</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="target">new</field>-->
+<!--        </record>-->
+
+    </data>
+</odoo>

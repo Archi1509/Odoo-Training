@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+BookStore_Management.access_book_details,access_book_details,BookStore_Management.model_book_details,,1,1,1,1
+BookStore_Management.access_author_details,access_author_details,BookStore_Management.model_author_details,,1,1,1,1
+BookStore_Management.access_customer_details,access_customer_details,BookStore_Management.model_customer_details,,1,1,1,1
+BookStore_Management.access_genre_details,access_genre_details,BookStore_Management.model_genre_details,,1,1,1,1
+BookStore_Management.access_order_details,access_order_details,BookStore_Management.model_order_details,,1,1,1,1
+BookStore_Management.access_orderliness_details,access_orderliness_details,BookStore_Management.model_orderliness_details,,1,1,1,1
+BookStore_Management.access_publisher_details,access_publisher_details,BookStore_Management.model_publisher_details,,1,1,1,1
+BookStore_Management.access_book_wizard_view,access_book_wizard_view,BookStore_Management.model_book_wizard_view,,1,1,1,1
+
+
+
+

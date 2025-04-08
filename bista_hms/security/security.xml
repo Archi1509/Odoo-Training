@@ -1,0 +1,49 @@
+<odoo>
+    <!-- Creating Groups -->
+    <!-- readonly User-->
+    <record id="group_prescription_user_readonly" model="res.groups">
+        <field name="name">Prescription User Readonly</field>
+    </record>
+    <!-- User can edit what they created -->
+    <record id="group_prescription_user" model="res.groups">
+        <field name="name">Prescription User</field>
+    </record>
+    <!-- Administrator-->
+    <record id="group_admin_prescription" model="res.groups">
+        <field name="name">Prescription Admin</field>
+    </record>
+
+    <!-- record rule for prescription -->
+    <record id="bista_hms_prescription_readonly_rule" model="ir.rule">
+        <field name="name">Prescription Rule</field>
+        <field name="model_id" ref="model_hms_prescription"/>
+        <field name="domain_force">[( 1, '=', 1 )]</field>
+        <field name="groups" eval="[(4, ref('bista_hms.group_prescription_user_readonly'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record id="bista_hms_prescription_user_rule" model="ir.rule">
+        <field name="name">Prescription Rule</field>
+        <field name="model_id" ref="model_hms_prescription"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('bista_hms.group_prescription_user'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+     <record id="bista_hms_prescription_admin" model="ir.rule">
+        <field name="name">Prescription Rule</field>
+        <field name="model_id" ref="model_hms_prescription"/>
+        <field name="domain_force">[( 1, '=', 1 )]</field>
+        <field name="groups" eval="[(4, ref('bista_hms.group_admin_prescription'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+</odoo>

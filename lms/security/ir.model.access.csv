@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+lms.access_library_book,access_library_book,lms.model_library_book,,1,1,1,1
+lms.access_library_author,access_library_author,lms.model_library_author,,1,1,1,1
+lms.access_library_category,access_library_category,lms.model_library_category,,1,1,1,1

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="team_rma_view_form" model='ir.ui.view'>
+        <field name="name">team.rma.view.form</field>
+        <field name="model">team.rma</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="team_id" readonly="True"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="team_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="team_rma_view_list" model="ir.ui.view">
+        <field name="name">team.rma.view.list</field>
+        <field name="model">team.rma</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="team_id"/>
+                <field name="team_name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="team_rma_action" model="ir.actions.act_window">
+        <field name="name">Teams</field>
+        <field name="res_model">team.rma</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_sale_rma" name="RMA"/>
+    <menuitem id="menu_team_rma_sub" name="Team" parent="menu_sale_rma" action="team_rma_action"/>
+</odoo>

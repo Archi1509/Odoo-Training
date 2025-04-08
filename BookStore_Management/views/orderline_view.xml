@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="orderliness_list_view" model="ir.ui.view">
+        <field name="name">orderliness.list.view</field>
+        <field name="model">orderliness.details</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+
+                <field name="quantity"/>
+                <field name="price_per_unit"/>
+                <field name="books_order" />
+
+            </list>
+        </field>
+    </record>
+
+        <record id="orderliness_form_view" model="ir.ui.view">
+        <field name="name">orderliness.form.view</field>
+        <field name="model">orderliness.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="quantity" />
+                        <field name="price_per_unit" />
+                    </group>
+                    <notebook>
+                        <page string="Books">
+                            <field name="books_order" />
+                        </page>
+                        <page string="Order">
+                            <field name="order_id"/>
+                        </page>
+                    </notebook>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <record id="orderliness_action" model="ir.actions.act_window">
+        <field name="name">OrderLines</field>
+        <field name="res_model">orderliness.details</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="book_root_menu" name="Book Store Management"/>
+    <menuitem id="orderliness_menu" name="OrderLine"
+    parent="book_root_menu"
+    action="orderliness_action"/>
+
+</odoo>

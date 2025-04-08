@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="genre_list_view" model="ir.ui.view">
+        <field name="name">genre.list.view</field>
+        <field name="model">genre.details</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="genre_name" />
+                <field name="description" />
+            </list>
+        </field>
+    </record>
+
+    <record id="genre_form_view" model="ir.ui.view">
+        <field name="name">genre.form.view</field>
+        <field name="model">genre.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="genre_name" />
+                        <field name="description" />
+                    </group>
+
+                    <notebook>
+                        <page string="Books">
+                            <group>
+                                <field name="genre_books"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="genre_action" model="ir.actions.act_window">
+        <field name="name">Genres</field>
+        <field name="res_model">genre.details</field>
+        <field name="view_mode">list,form</field>
+    </record>
+     <menuitem id="book_root_menu" name="Book Store Management"/>
+
+    <menuitem id="genre_menu" name="Genre"
+    parent="book_root_menu"
+    action="genre_action"/>
+
+
+
+</odoo>

@@ -1,0 +1,20 @@
+{
+    'name':'RMA',
+    'author':'Archi',
+    'version':'0.1',
+    'sequence':'-10',
+    'summery':'RMA System',
+    'description':'RMA System',
+    'category':'Management',
+    'depends':['base','sale'],
+    'data':[
+        'security/ir.model.access.csv',
+        'data/ir_sequence.xml',
+        'wizard/rma_wizard_view.xml',
+        'views/sale_rma_view.xml',
+        'views/sale_rma_line_view.xml',
+        'views/team_view.xml',
+    ],
+    'installable': True,
+    'license': 'OEEL-1'
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="mail_template_appointment" model="mail.template">
+        <field name="name">Appointment Template</field>
+        <field name="model_id" ref="bista_hms.model_hms_appointment"/>
+        <field name="email_from">{{object.env.user.email}}</field>
+        <field name="email_to">{{object.doctor_id.email}}</field>
+        <field name="subject">Your Todays Appointments</field>
+        <field name="body_html" type="html">
+            <div>
+                <p>Dear<strong> <t t-out="object.doctor_id.name"/> </strong>,
+                    <p>Here are your Appointment that are scheduled on today.</p>
+                </p>
+                <table>
+                    <thead>
+                        <tr style="background-color: #f2f2f2; text-align: left;">
+                            <th style="border: 1px solid #ddd; padding: 8px;">Appointment ID</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Patient</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Reason</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="object.doctor_id.appointment_ids" t-as="line">
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 8px;">
+                                    <t t-esc="line.appointment_code"/>
+                                </td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">
+                                    <t t-esc="line.patient_id.name"/>
+                                </td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">
+                                    <t t-esc="line.appointment_reason"/>
+                                </td>
+                                <td style="border: 1px solid #ddd; padding: 8px;">
+                                    <t t-esc="line.phone"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <p>
+                    Please feel free to contact us if you have any questions about your appointment.
+                </p>
+                <p>Best Regards,</p>
+            </div>
+        </field>
+    </record>
+</odoo>
