@@ -8,6 +8,7 @@ class HmsAppointment(models.Model):
     _name = "hms.appointment"
     _description = "Appointment"
     _rec_name = 'patient_id'
+    _inherit = ['mail.thread','mail.activity.mixin']
 
     appointment_code = fields.Char(string="Appointment ID")
     phone = fields.Char(string="Phone")

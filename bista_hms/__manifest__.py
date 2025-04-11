@@ -24,7 +24,12 @@
         'views/prescriptionline_view.xml',
         'views/sale_order_view.xml',
         'views/res_patner_view.xml',
-        'views/stock_picking_view.xml'
+        'views/stock_picking_view.xml',
+        'views/report.xml',
+        'views/prescription_report_template.xml',
+        'views/product_view.xml',
+        'wizard/product_wizard_view.xml',
+        'views/sale_order_report_template.xml',
         ],
     'installable':True,
     'license':'OEEL-1'

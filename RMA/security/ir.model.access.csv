@@ -3,3 +3,4 @@ RMA.access_sale_rma,access_sale_rma,RMA.model_sale_rma,,1,1,1,1
 RMA.access_sale_rma_line,access_sale_rma_line,RMA.model_sale_rma_line,,1,1,1,1
 RMA.access_team_rma,access_team_rma,RMA.model_team_rma,,1,1,1,1
 RMA.access_rma_wizard,access_rma_wizard,RMA.model_rma_wizard,,1,1,1,1
+RMA.access_rma_line_wizard,access_rma_line_wizard,RMA.model_rma_line_wizard,,1,1,1,1

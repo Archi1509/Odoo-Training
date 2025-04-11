@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="product_update_wizard_form" model="ir.ui.view">
+            <field name="name">product.update.wizard.form</field>
+            <field name="model">productupdate.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="location_id"/>
+                            <field name="quantity"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="update_on_hand_quantity" class="btn-primary" type="object" string="ADD"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

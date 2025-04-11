@@ -5,7 +5,7 @@
         <field name="model">sale.rma.line</field>
         <field name="arch" type="xml">
             <list editable="bottom">
-                <field name="product_id" domain="[('order_id','=',parent.sale_order)]"/>
+                <field name="product_id"/>
                 <field name="quantity"/>
                 <field name="unit_price"/>
                 <field name="to_receive"/>

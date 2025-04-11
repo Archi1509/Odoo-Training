@@ -19,6 +19,9 @@
             <!--<xpath expr="//group[@name='sale_shipping']/field[@name='warehouse_id']" position="after">
 
             </xpath> -->
+            <xpath expr="//field[@name='note']" position="after">
+                <field name="amount_total_words" placeholder="Amount in words"/>
+            </xpath>
         </field>
     </record>
 </odoo>

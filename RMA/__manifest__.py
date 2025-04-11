@@ -14,6 +14,7 @@
         'views/sale_rma_view.xml',
         'views/sale_rma_line_view.xml',
         'views/team_view.xml',
+        'wizard/rma_line_wizard.xml'
     ],
     'installable': True,
     'license': 'OEEL-1'

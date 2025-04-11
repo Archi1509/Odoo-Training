@@ -9,6 +9,11 @@
                     <button name="action_open_wizard" string="Return" type="object" class="btn-primary"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_show_delivery" class="oe_stat_button" icon="fa-solid fa-truck" >
+                            <field string="Delivery" name="picking_ids" widget="statinfo"/>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="rma_id" readonly="True"/>
@@ -17,7 +22,7 @@
                     <group>
                         <field name="team_id" required="True"/>
                         <field name="date"/>
-                        <field name="sale_order"/>
+                        <field name="sale_order_id"/>
                     </group>
                     <notebook>
                         <page string="Sale Order Line">
@@ -37,7 +42,7 @@
                 <field name="rma_id"/>
                 <field name="team_id"/>
                 <field name="date"/>
-                <field name="sale_order"/>
+                <field name="sale_order_id"/>
             </list>
         </field>
     </record>

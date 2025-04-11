@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="rma_line_wizard_list" model="ir.ui.view">
+            <field name="name">rma.line.wizard.list</field>
+            <field name="model">rma.line.wizard</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="product_id"/>
+                    <field name="sale_order_quantity"/>
+                    <field name="quantity"/>
+                </list>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,4 +1,6 @@
 from odoo import fields,models,api
+from num2words import num2words
+
 from odoo.api import depends, readonly, ValuesType, Self
 
 
@@ -7,6 +9,13 @@ class SaleOrder(models.Model):
     _description = "Inherit Sale Order"
 
     lead_reference=fields.Char(string="Lead Reference")
+    amount_total_words = fields.Char(string="Total Amount in words",compute="convert_num_to_word")
+
+    @api.depends('amount_total')
+    def convert_num_to_word(self):
+        for rec in self:
+                rec.amount_total_words =num2words(rec.amount_total, lang='en_IN', to='currency',currency='USD').title()
+        return rec
 
     # @api.depends('order_line.price_subtotal', 'currency_id', 'company_id', 'payment_term_id','discount_amount')
     # def _compute_amounts(self):

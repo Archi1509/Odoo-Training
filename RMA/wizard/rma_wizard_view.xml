@@ -8,10 +8,13 @@
                 <form>
                     <sheet>
                         <group>
-                            <field name="product_id"/>
-                            <field name="sale_order_quantity"/>
-                            <field name="quantity"/>
+                            <field name="active_id"/>
                         </group>
+                        <notebook>
+                            <page string="RMA Lines">
+                                <field name="rma_line"/>
+                            </page>
+                        </notebook>
                     </sheet>
                     <footer>
                         <button name="action_process" type="object" class="btn-primary" string="Process"/>

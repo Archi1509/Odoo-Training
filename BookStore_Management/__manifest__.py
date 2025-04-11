@@ -20,7 +20,8 @@
             'views/order_view.xml',
             'views/orderline_view.xml',
             'views/publisher_view.xml',
-            'wizard/book_wizard_view.xml'
+            'wizard/book_wizard_view.xml',
+
         ],
     'installable':True,
     'application':True,

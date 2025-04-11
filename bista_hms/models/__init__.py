@@ -1,1 +1,1 @@
-from . import patients,appointment,doctor,specialization,hospital,prescription,prescriptionline,sale_order,sale_order_line,res_patmer,stockpicking,stock_move
+from . import patients,appointment,doctor,specialization,hospital,prescription,prescriptionline,sale_order,sale_order_line,res_patmer,stockpicking,stock_move,product

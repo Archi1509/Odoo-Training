@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="sale_order_report_template" >
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <hr style="border 3x solid black"/>
+                    <div class="container">
+                        <h1 class="floatRight" align="right">Sale Order</h1>
+                    </div>
+                    <div class="container">
+                        <table class="floatRight" style=" border: 1px solid grey; padding-top:25px; float: right; ">
+                            <thead>
+                                <tr>
+                                    <th  style="color: white; background-color: black; padding:15px; "><strong>Date</strong></th>
+                                    <th  style="color: white; background-color: black; padding:15px;"><strong>Order ID</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:15px;"><span t-esc="o.date_order"/></td>
+                                    <td  style="padding:15px;"><span t-esc="o.name"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="container" style="overflow: hidden; padding-top:15px">
+                        <div class="floatLeft" style="width: 40%; float: left;">
+                            <table align="left" style=" border: 1px solid grey;">
+                                <thead>
+                                    <tr>
+                                        <th class="box3_t" style="color: white; background-color: black; padding:15px; "><strong>Bill To</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="box3_t" style="padding:15px;" ><span t-esc="o.partner_id.contact_address_inline"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="floatRight" style="width: 40%; float: right; ">
+                            <table align="right" style=" border: 1px solid grey;" >
+                                <thead>
+                                    <tr>
+                                        <th class="box4_t" style="color: white; background-color: black; padding:15px; "><strong>Ship To</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="box3_t" style="padding:15px; "><span t-esc="o.partner_id.contact_address_inline"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="margin-top:15px">
+                        <table align="middle" width="100%" style=" border: 1px solid grey;">
+                            <thead>
+                                <tr>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Customer PO</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Ship Via</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Inco Terms</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Acct #:</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Estimated Ship Date:</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Salesperson</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Payment Terms</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:15px;"><span t-esc="o.partner_id.display_name"/></td>
+                                    <td style="padding:15px;"></td>
+                                    <td style="padding:15px;"><span t-esc="o.incoterm.display_name"/></td>
+                                    <td style="padding:15px;"></td>
+                                    <td style="padding:15px;"><span t-esc="o.expected_date"/></td>
+                                    <td style="padding:15px;"><span t-esc="o.user_id.display_name"/></td>
+                                    <td style="padding:15px;"><span t-esc="o.payment_term_id.display_name"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top:15px">
+                        <table align="middle" width="100%" style=" border: 1px solid grey;">
+                            <thead>
+                                <tr>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>#</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Discription</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Model</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Quantity</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>UOM</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Unit Price</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Discount(%)</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Taxes</strong></th>
+                                    <th style="color: white; background-color: black; padding:15px; "><strong>Total</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.order_line" t-as="line">
+                                    <td style="padding:15px;"><span t-esc="line_index+1"/></td>
+                                    <td style="padding:15px;"><span t-esc="line.product_template_id.display_name"/></td>
+                                    <td style="padding:15px;"></td>
+                                    <td style="padding:15px;"><span t-esc="line.product_uom_qty"/></td>
+                                    <td style="padding:15px;"><span t-esc="line.product_uom.display_name"/></td>
+                                    <td style="padding:15px;"><span t-esc="line.price_unit"/>$</td>
+                                    <td style="padding:15px;"><span t-esc="line.discount"/></td>
+                                    <td style="padding:15px;"><span t-esc="line.tax_id.display_name"/></td>
+                                    <td style="padding:15px;"><span t-esc="line.price_subtotal"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div align="right" style="margin-top:15px;">
+                        <table>
+                            <tr>
+                                <td style="padding:15px;"><strong>Sub-Total</strong></td>
+                                <td style="padding:15px;"><span t-esc="o.amount_untaxed"/> $</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:15px;"><strong>Tax</strong></td>
+                                <td style="padding:15px;"><span t-esc="o.amount_tax"/> $</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:15px;"><strong>Discount</strong></td>
+                                <td style="padding:15px;">0.00 $</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:15px;"><strong>Shipping &amp; Handling</strong></td>
+                                <td style="padding:15px;">0.00 $</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div align="right" style="margin-top:15px;">
+                        <table>
+                            <tr>
+                                <td style="padding:15px;"><strong>Total</strong></td>
+                                <td style="padding:15px;"><span t-esc="o.amount_total"/> $</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -6,15 +6,16 @@ class HmsPrescription(models.Model):
     _name = "hms.prescription"
     _description = "Prescription"
     _rec_name = "patient_id"
+    _inherit = ['mail.thread','mail.activity.mixin']
 
     patient_id=fields.Many2one('res.patient',string="Patient")
-    date=fields.Date(string="Date")
+    date=fields.Date(string="Date", tracking=True)
     doctor_id=fields.Many2one("res.doctor",string="Doctor")
     medicines = fields.Text(string="Medicines")
     state = fields.Selection([('draft', 'Draft'),
                               ('confirm', 'Confirm'),
                               ('cancel', 'Cancel')],
-                             string="Status", default='draft')
+                             string="Status", default='draft',tracking=True)
     prescription_lines=fields.One2many("prescription.line","prescription_id",string="Prescription" )
     prescription_count=fields.Integer(string="Count",compute="_compute_related_prescription")
     total_amount = fields.Float(compute='_compute_total_amount', string="Total Amount",store=True)
@@ -22,6 +23,10 @@ class HmsPrescription(models.Model):
     picking_ids=fields.One2many("stock.picking","prescription_id","Pickings")
     delivery_count=fields.Integer(string="Count",compute="_compute_count_deliveries")
     previous_delivery_quantity=fields.Integer("Previous Quantity")
+
+    def action_print_report(self):
+        template_id = self.env.ref('bista_hms.action_prescription_report')
+        return template_id.report_action(self)
 
 
     @api.depends('prescription_lines.move_ids')
