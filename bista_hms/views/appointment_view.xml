@@ -43,14 +43,14 @@
                     </div>
                     <group>
                         <group>
-                            <field name="patient_id" />
+                            <field name="patient_id"  context="{'show_phone':1}" options="{'always_reload' : True}"/>
                             <field name="appointment_date"/>
                             <field name="appointment_reason"/>
                             <field name="phone"/>
                             <field name="product" domain="[('type', '=', 'service')]"/>
                         </group>
                         <group>
-                            <field name="guardian_id"/>
+                            <field name="guardian_id" context="{'show_address':1}" options="{'always_reload': True}"/>
                             <field name="guardian_type"/>
                         </group>
                         <group >

@@ -8,7 +8,10 @@
     'category':'Management',
     'depends':['base','sale'],
     'data':[
+        'security/security.xml',
         'security/ir.model.access.csv',
+        'views/sale_order_view.xml',
+
     ],
     'installable': True,
     'license': 'OEEL-1'

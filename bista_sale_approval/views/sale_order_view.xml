@@ -6,8 +6,15 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_cancel'" position="after">
-                <button name="action_approval" type="object" class="btn-primary" string="Approve"/>
+            <xpath expr="//button[@name='action_preview_sale_order']" position="after">
+                <button name="action_approval"
+                    type="object"
+                    string="Approve"
+                    class="btn-primary"
+                    invisible = "state not in ('to_approve')" groups="bista_sale_approval.group_sale_order_admin"/>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" statusbar_visible="draft,sent,to_approve,sale,done,cancel" />
             </xpath>
         </field>
     </record>

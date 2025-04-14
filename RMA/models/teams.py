@@ -9,6 +9,7 @@ class TeamRMA(models.Model):
     # team_id = fields.Many2one("team.rma",string = "Team")
     team_name = fields.Char("Team Name")
 
+
     @api.model_create_multi
     def create(self, vals_list):
         res = super(TeamRMA, self).create(vals_list)

@@ -7,9 +7,6 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <group>
-                            <field name="active_id"/>
-                        </group>
                         <notebook>
                             <page string="RMA Lines">
                                 <field name="rma_line"/>

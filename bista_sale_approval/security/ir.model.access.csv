@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+bista_sale_approval.access_sale_order_readonly_user,access_sale_order_readonly_user,bista_sale_approval.model_sale_order,bista_sale_approval.group_sale_order_user_readonly,1,0,0,0
+bista_sale_approval.access_sale_order_user,access_sale_order_user,bista_sale_approval.model_sale_order,bista_sale_approval.group_sale_order_user,1,1,1,0
+bista_sale_approval.access_sale_order_admin,access_sale_order_admin,bista_sale_approval.model_sale_order,bista_sale_approval.group_sale_order_admin,1,1,1,1

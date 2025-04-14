@@ -25,6 +25,7 @@ class SaleRMA(models.Model):
                 'product_id': rec.product_id.id,
                 'quantity': rec.product_uom_qty,
                 'unit_price':rec.price_unit,
+                'to_be_received':rec.product_uom_qty,
             }))
         self.sale_rma_line = vals
 
@@ -50,7 +51,10 @@ class SaleRMA(models.Model):
             rma_line.append((0,0,{
                 'product_id':line.product_id.id,
                 'sale_order_quantity':line.quantity,
-                'quantity':line.to_receive,
+                'quantity': line.to_be_received,
+                'to_be_received': line.to_be_received,
+                'rma_line_id': line.id,
+
             }))
 
         return {
@@ -79,7 +83,7 @@ class SaleRMA(models.Model):
         if self.delivery_count >= 0:
             res['view_mode'] = 'list,form'
             res['views'] = [(list_view_id, 'list'), (form_view_id, 'form')]
-            res['domain'] = [('prescription_id', '=', self.id)]
+            res['domain'] = [('rma_picking_id', '=', self.id)]
             res['view_id'] = False
         return res
 

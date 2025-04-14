@@ -12,6 +12,9 @@ class SaleRMALine(models.Model):
     received_qty = fields.Float(string="Received Quantity")
     sale_rma_id = fields.Many2one('sale.rma',string="Sale RMA ID")
     move_ids=fields.One2many("stock.move","rma_line_id","Delivery")
+    to_be_received = fields.Float("To be Received")
+
+
 
 
 
