@@ -1,7 +1,7 @@
 from email.policy import default
 
 from odoo import fields,models,api
-
+from odoo.exceptions import UserError
 class SaleRMA(models.Model):
     _name = "sale.rma"
     _description = "Sale RMA"
@@ -31,18 +31,22 @@ class SaleRMA(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        res = super(SaleRMA, self).create(vals_list)
-        for record in res:
-            if record.rma_id == "New":
-                base_seq = self.env['ir.sequence'].next_by_code('sale.rma')
-            else:
-                base_seq = record.rma_id
+        for rec in vals_list:
+            if rec['team_id']:
+                team = self.env['team.rma'].browse(rec['team_id'])
+                prefix = team.prefix
+                seq_name = f'Sale RMA {team.team_name}'
+                seq_code = f'sale.rma.{team.id}'
 
-            team_order = self.env['team.rma'].search([('team_name','=',record.team_id.team_name)],limit=1)
-            suffix = team_order.team_id if team_order  else "Unknown"
-            record.rma_id = f'{base_seq}/{suffix}'
-
-        return res
+                if not self.env['ir.sequence'].search([('code', '=', seq_code)], limit=1):
+                    self.env['ir.sequence'].create({
+                        'name': seq_name,
+                        'code': seq_code,
+                        'prefix': prefix,
+                        'padding': 4,
+                    })
+                rec['rma_id'] = self.env['ir.sequence'].next_by_code(seq_code)
+        return super(SaleRMA, self).create(vals_list)
 
     def action_open_wizard(self):
         view_id = self.env.ref('RMA.rma_wizard_form').id
@@ -91,4 +95,5 @@ class SaleRMA(models.Model):
     def _compute_count_deliveries(self):
         for record in self:
             record.delivery_count = self.env['stock.move'].search_count([('rma_line_id', '=', record.id)])
+
 

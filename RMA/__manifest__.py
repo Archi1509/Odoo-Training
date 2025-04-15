@@ -9,7 +9,7 @@
     'depends':['base','sale'],
     'data':[
         'security/ir.model.access.csv',
-        'data/ir_sequence.xml',
+
         'wizard/rma_wizard_view.xml',
         'views/sale_rma_view.xml',
         'views/sale_rma_line_view.xml',

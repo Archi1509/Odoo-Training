@@ -6,13 +6,9 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="team_id" readonly="True"/>
-                        </h1>
-                    </div>
                     <group>
                         <field name="team_name"/>
+                        <field name="prefix"/>
                     </group>
                 </sheet>
             </form>
@@ -24,7 +20,7 @@
         <field name="model">team.rma</field>
         <field name="arch" type="xml">
             <list>
-                <field name="team_id"/>
+                <field name="prefix"/>
                 <field name="team_name"/>
             </list>
         </field>

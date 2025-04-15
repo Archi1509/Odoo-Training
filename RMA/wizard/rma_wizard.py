@@ -10,20 +10,18 @@ class RMAWizard(models.TransientModel):
 
 
     def action_process(self):
-        for line in self.rma_line:
-            if line.quantity > line.sale_order_quantity:
-                raise ValidationError("You can't return more than you ordered")
         picking_vals = self.prepare_picking_vals()
         picking_id = self.env['stock.picking'].create(picking_vals)
 
         move_vals = self.prepare_move_vals(picking_id)
         move_id = self.env['stock.move'].create(move_vals)
+
         active_id = self._context.get('active_id')
         sale_order_details = self.env['sale.rma'].browse(active_id)
         for rec in self.rma_line:
             matching_line = sale_order_details.sale_rma_line.filtered(lambda l: l.product_id == rec.product_id)
             if matching_line:
-                matching_line.to_receive = rec.quantity
+                matching_line.to_receive = matching_line.to_receive + rec.quantity
                 matching_line.to_be_received = rec.to_be_received
 
     def prepare_picking_vals(self):
@@ -66,10 +64,16 @@ class RMALineWizard(models.TransientModel):
     line_id =fields.Many2one("rma.wizard")
     to_be_received = fields.Float("To be Received")
 
-    @api.onchange('quantity', 'sale_order_quantity')
-    def _onchange_quantity_or_sale_qty(self):
-        for rec in self:
-            sum=0
-            rec.to_be_received = rec.to_be_received - rec.quantity
-            sum += rec.quantity
-            rec.quantity = sum
+    @api.constrains('quantity', 'to_be_received')
+    def check_avail(self):
+        for line in self:
+            if line.quantity < line.sale_order_quantity or line.quantity > line.to_be_received:
+                raise ValidationError("You cant return more then you ordered")
+
+    @api.onchange('quantity')
+    def _onchange_quantity(self):
+        self.check_avail()
+        for line in self:
+            line.to_be_received = line.to_be_received - line.quantity
+
+
