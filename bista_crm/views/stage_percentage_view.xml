@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stage_percentage_list_view" model="ir.ui.view">
+        <field name="name">stage.percentage.list.view</field>
+        <field name="model">stage.percentage</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name" />
+                <field name="percentage" />
+            </list>
+        </field>
+    </record>
+
+    <record id="stage_percentage_action" model="ir.actions.act_window">
+        <field name="name">Percentage Stage</field>
+        <field name="res_model">stage.percentage</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem id="menu_probability_stage_sub"
+              name="Probability Stage"
+              parent="crm.menu_crm_config_lead"
+              action="stage_percentage_action"/>
+</odoo>

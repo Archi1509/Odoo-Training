@@ -6,8 +6,12 @@
     'summery':'CRM System',
     'description':'CRM System',
     'category':'Management',
-    'depends':['base','crm  '],
+    'depends':['base','crm','sale_crm','sale'],
     'data':[
+        'security/ir.model.access.csv',
+        'views/crm_lead_view.xml',
+        'views/stage_percentage_view.xml',
+        'views/sale_order_view.xml',
     ],
     'installable': True,
     'license': 'OEEL-1'
