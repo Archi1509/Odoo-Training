@@ -6,7 +6,7 @@
     'summery':'RMA System',
     'description':'RMA System',
     'category':'Management',
-    'depends':['base','sale'],
+    'depends':['base','sale','account'],
     'data':[
         'security/ir.model.access.csv',
 
@@ -14,7 +14,8 @@
         'views/sale_rma_view.xml',
         'views/sale_rma_line_view.xml',
         'views/team_view.xml',
-        'wizard/rma_line_wizard.xml'
+        'wizard/rma_line_wizard.xml',
+        'wizard/rma_invoice_wizard.xml',
     ],
     'installable': True,
     'license': 'OEEL-1'

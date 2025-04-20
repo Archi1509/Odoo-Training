@@ -10,7 +10,8 @@
                 <field name="unit_price"/>
                 <field name="to_receive"/>
                 <field name="received_qty"/>
-                <field name="to_be_received" force_save="1"/>
+                <field name="invoiced_qty"/>
+                <field name="qty_to_invoice"/>
             </list>
         </field>
     </record>

@@ -13,7 +13,9 @@ class SaleRMA(models.Model):
     sale_order_id = fields.Many2one("sale.order", string = "Order")
     sale_rma_line = fields.One2many("sale.rma.line" , "sale_rma_id", string="RMAs")
     picking_ids = fields.One2many("stock.picking","rma_picking_id",string="Delivery")
-    delivery_count=fields.Integer(string="Count",compute="_compute_count_deliveries")
+    invoice_ids = fields.One2many("account.move", 'sale_rma_invoice_id', string="Invoiced")
+    delivery_count=fields.Integer(string="Count",compute="_compute_count_deliveries",store=True)
+    invoice_count=fields.Integer(string="Count",compute="_compute_count_invoices",store=True)
 
 
     @api.onchange('sale_order_id')
@@ -25,7 +27,7 @@ class SaleRMA(models.Model):
                 'product_id': rec.product_id.id,
                 'quantity': rec.product_uom_qty,
                 'unit_price':rec.price_unit,
-                'to_be_received':rec.product_uom_qty,
+
             }))
         self.sale_rma_line = vals
 
@@ -55,8 +57,7 @@ class SaleRMA(models.Model):
             rma_line.append((0,0,{
                 'product_id':line.product_id.id,
                 'sale_order_quantity':line.quantity,
-                'quantity': line.to_be_received,
-                'to_be_received': line.to_be_received,
+                'quantity': line.quantity -(line.to_receive + line.received_qty),
                 'rma_line_id': line.id,
 
             }))
@@ -95,5 +96,58 @@ class SaleRMA(models.Model):
     def _compute_count_deliveries(self):
         for record in self:
             record.delivery_count = self.env['stock.move'].search_count([('rma_line_id', '=', record.id)])
+
+    def action_open_invoice_wizard(self):
+        view_id = self.env.ref('RMA.rma_invoice_wizard_form').id
+        self.sale_rma_line._compute_invoiced_qty()
+        rma_invoice_line = []
+        for line in self.sale_rma_line:
+            rma_invoice_line.append((0, 0, {
+                'product_id': line.product_id.id,
+                'sale_order_quantity': line.quantity,
+                'to_invoice': line.qty_to_invoice,
+                'rma_line_id': line.id,
+
+            }))
+
+        return {
+            'name': 'Invoice',
+            'view_mode': 'form',
+            'res_model': 'rma.invoice.wizard',
+            'view_id': view_id,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': {'default_rma_invoice_wizard_line': rma_invoice_line}
+        }
+
+    def action_show_invoice(self):
+        form_view_id = self.env.ref('account.view_move_form').id
+        list_view_id = self.env.ref('account.view_out_invoice_tree').id
+
+        res = {
+            'name': 'Invoice',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'list',
+            'res_model': 'account.move',
+            'target': 'current',
+            'view_id': list_view_id,
+            'context': {'default_sale_rma_invoice_id': self.id}
+        }
+
+        if self.invoice_count >= 0:
+            res['view_mode'] = 'list,form'
+            res['views'] = [(list_view_id, 'list'), (form_view_id, 'form')]
+            res['domain'] = [('sale_rma_invoice_id', '=', self.id)]
+            res['view_id'] = False
+        return res
+
+    @api.depends('sale_rma_line.invoice_ids')
+    def _compute_count_invoices(self):
+        for record in self:
+            record.invoice_count = self.env['account.move'].search_count([('sale_rma_invoice_id', '=', record.id)])
+
+
+
+
 
 

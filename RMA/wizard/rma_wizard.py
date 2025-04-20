@@ -10,19 +10,29 @@ class RMAWizard(models.TransientModel):
 
 
     def action_process(self):
+        self.action_create_delivery()
+        active_id = self._context.get('active_id')
+        sale_order_details = self.env['sale.rma'].browse(active_id)
+
+    def action_create_delivery(self):
         picking_vals = self.prepare_picking_vals()
         picking_id = self.env['stock.picking'].create(picking_vals)
 
         move_vals = self.prepare_move_vals(picking_id)
         move_id = self.env['stock.move'].create(move_vals)
 
-        active_id = self._context.get('active_id')
-        sale_order_details = self.env['sale.rma'].browse(active_id)
-        for rec in self.rma_line:
-            matching_line = sale_order_details.sale_rma_line.filtered(lambda l: l.product_id == rec.product_id)
-            if matching_line:
-                matching_line.to_receive = matching_line.to_receive + rec.quantity
-                matching_line.to_be_received = rec.to_be_received
+        move_id._action_confirm(merge=False)
+        # picking_id.action_confirm()
+        picking_id.action_assign()
+        # picking_id.button_validate()
+
+
+    @api.model
+    def default_get(self, fields_list):
+        res = super(RMAWizard, self).default_get(fields_list)
+        if 'default_rma_line' in self.env.context:
+            res['rma_line'] = self.env.context.get('default_rma_line')
+        return res
 
     def prepare_picking_vals(self):
         picking_type_id = self.env['stock.picking.type'].search([('code', '=', 'incoming')],limit=1)
@@ -59,21 +69,26 @@ class RMALineWizard(models.TransientModel):
 
     product_id = fields.Many2one('product.product', string='Product')
     rma_line_id = fields.Many2one('sale.rma.line', string="RMA Line")
-    sale_order_quantity = fields.Float(string='Ordered Quantity')
-    quantity = fields.Float(string='To Receive')
+    sale_order_quantity = fields.Float(string='Ordered Quantity' ,readonly=True)
+    quantity = fields.Float(string='To Receive',store=True, compute = "_compute_to_receive",readonly= False )
     line_id =fields.Many2one("rma.wizard")
-    to_be_received = fields.Float("To be Received")
 
-    @api.constrains('quantity', 'to_be_received')
-    def check_avail(self):
+    @api.depends('rma_line_id.to_receive','rma_line_id.received_qty','rma_line_id.quantity')
+    def _compute_to_receive(self):
         for line in self:
-            if line.quantity < line.sale_order_quantity or line.quantity > line.to_be_received:
-                raise ValidationError("You cant return more then you ordered")
+            line.quantity = self.rma_line_id.quantity - (self.rma_line_id.to_receive + self.rma_line_id.received_qty)
 
-    @api.onchange('quantity')
-    def _onchange_quantity(self):
-        self.check_avail()
+    @api.constrains('quantity')
+    def check_to_receive(self):
         for line in self:
-            line.to_be_received = line.to_be_received - line.quantity
+            current_to_receive = line.rma_line_id.quantity - (line.rma_line_id.to_receive + line.rma_line_id.received_qty)
+            if line.quantity > line.rma_line_id.quantity  or line.quantity > current_to_receive:
+                raise ValidationError(f"You cant return more then {current_to_receive}.")
+
+
+
+
+
+
 
 

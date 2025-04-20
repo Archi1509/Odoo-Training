@@ -7,11 +7,15 @@
             <form>
                 <header>
                     <button name="action_open_wizard" string="Return" type="object" class="btn-primary"/>
+                    <button name="action_open_invoice_wizard" string="Create Invoice" type="object" class="btn-primary"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button type="object" name="action_show_delivery" class="oe_stat_button" icon="fa-solid fa-truck" >
                             <field string="Delivery" name="picking_ids" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_show_invoice" class="oe_stat_button" icon="fa-file-invoice" >
+                            <field string="Invoiced" name="invoice_ids" widget="statinfo"/>
                         </button>
                     </div>
                     <div class="oe_title">

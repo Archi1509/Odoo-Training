@@ -9,7 +9,7 @@
                     <field name="product_id"/>
                     <field name="sale_order_quantity"/>
                     <field name="quantity"/>
-                    <field name="to_be_received" force_save="1"/>
+                    <field name="rma_line_id" force_save="1" readonly="1" column_invisible="1"/>
                 </list>
             </field>
         </record>
