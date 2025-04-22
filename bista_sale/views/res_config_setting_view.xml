@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_sale" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='email_template']" position="after">
+                    <setting id="so_expiry_notify" company_dependent="1" help="Number of day before you want to be notified">
+                        <field name="notify_user"/>
+                        <div class="content-group">
+                            <div class="row mt16">
+                                <field name="quote_notification_before_expiry" force_save="1"/>
+                            </div>
+                        </div>
+                    </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

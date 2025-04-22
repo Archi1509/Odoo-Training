@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Template to send demo mail template for the customer-->
+        <record id="bista_sale_mail_template" model="mail.template">
+            <field name="name">Bista Sale Mail Template</field>
+            <field name="model_id" ref="bista_sale.model_sale_order"/>
+            <field name="email_from">{{object.env.user.company_id.email}}</field>
+            <field name="email_to">{{object.env.user.email}}</field>
+            <field name="subject">Notification Regarding Expiry of Quotation</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div >
+                        <h2>
+                            Hi,
+                            <t t-out="object.env.user.name"/>
+                        </h2>
+                        <div>
+                            <table class="table" >
+                                <thead >
+                                    <tr>
+                                        <th>Order Number</th>
+                                        <th>Customer</th>
+                                        <th>Total Amount</th>
+                                        <th>Expiry Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <t t-foreach="object.get_draft_quotation()" t-as="line">
+                                        <tr>
+                                            <td><span t-out="line.name"/></td>
+                                            <td><span t-out="line.partner_id.name"/></td>
+                                            <td><span t-out="line.amount_total"/></td>
+                                            <td><span t-out="line.validity_date"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    Regards,
+                    <br/>
+                    <t t-out="object.env.user.company_id.email"/>
+                    <br/>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>
