@@ -7,16 +7,18 @@ from odoo.exceptions import UserError, ValidationError
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    stage_percentage = fields.Many2one("stage.percentage",string="Stage Percentage")
+    stage_percentage = fields.Many2one("stage.percentage",string="Stage Percentage",related = 'opportunity_id.stage_percentage',store=True)
 
     def action_confirm(self):
-        super().action_confirm()
-        select_stage = self.env['stage.percentage'].search([('percentage','=',100)])
-        if not self.stage_percentage:
-            if not select_stage:
-                raise ValidationError("Select a Stage.")
-            else:
-                self.stage_percentage = select_stage
+        if self.opportunity_id:
+            if not self.stage_percentage:
+                select_stage = self.env['stage.percentage'].search([('percentage', '=', 100)])
+                if not select_stage:
+                    raise ValidationError("Select a Stage.")
+                else:
+                    self.stage_percentage = select_stage
+        res = super(SaleOrder,self).action_confirm()
+        return res
 
 
 
