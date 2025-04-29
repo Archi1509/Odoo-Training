@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Template to send demo mail template for the customer-->
+        <record id="dms_mail_template" model="mail.template">
+            <field name="name">DMS Mail Template</field>
+            <field name="model_id" ref="document_management_system.model_sale_order"/>
+            <field name="email_from">{{object.env.user.email}}</field>
+            <field name="email_to">{{object.user_id.login}}</field>
+            <field name="subject">Notification Regarding Get Document Button</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div >
+                        <h2>
+                            Hi,
+                            <t t-out="object.user_id.name"/>
+                        </h2>
+                    </div>
+                    <br/>
+                        <p>Sale Order ID <strong><t t-out="object.name"/></strong>, Get Documents Button was used. </p>
+                    <br/>
+                    Regards,
+                    <br/>
+                    <t t-out="object.env.user.company_id.email"/>
+                    <br/>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

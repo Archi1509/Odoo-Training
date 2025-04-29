@@ -13,9 +13,6 @@
                     class="btn-primary"
                     invisible = "state not in ('to_approve')" groups="bista_sale_approval.group_sale_order_admin"/>
             </xpath>
-            <xpath expr="//field[@name='state']" position="replace">
-                <field name="state" widget="statusbar" statusbar_visible="draft,sent,to_approve,sale,done,cancel" />
-            </xpath>
         </field>
     </record>
 </odoo>

@@ -1,0 +1,32 @@
+{
+    'name':'Document Management System',
+    'author':'Archi',
+    'version':'0.1',
+    'sequence':'-10',
+    'summery':'Document System',
+    'description':'Document System',
+    'category':'Management',
+    'depends':['base','sale','product','mail','stock'],
+    'data':[
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'views/document_custom_view.xml',
+        'views/doc_tag_master_view.xml',
+        'views/res_partner_view.xml',
+        'views/product_product_view.xml',
+        'wizard/add_doc_wizard_view.xml',
+        'views/sale_order_view.xml',
+        'views/stock_picking_view.xml',
+        'views/delivery_order_slip_report_inherit.xml',
+        'data/mail_template.xml',
+        'data/system_parameter.xml',
+        'views/res_config_setting_view.xml',
+        'views/sale_order_report_template.xml',
+        'views/sale_order_report_template_inherit.xml',
+        'views/sale_order_document_line_view.xml',
+        'views/student_activity_view.xml',
+
+    ],
+    'installable': True,
+    'license': 'OEEL-1'
+}

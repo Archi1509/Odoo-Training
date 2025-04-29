@@ -9,6 +9,7 @@
     'depends':['base','crm','sale_crm','sale'],
     'data':[
         'security/ir.model.access.csv',
+        'data/crm_percent_stage.xml',
         'views/crm_lead_view.xml',
         'views/stage_percentage_view.xml',
         'views/sale_order_view.xml',

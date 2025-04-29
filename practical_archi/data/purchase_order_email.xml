@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="purchase_order_mail_template" model="mail.template">
+            <field name="name">Purchase Order Mail Template</field>
+            <field name="model_id" ref="practical_archi.model_purchase_order"/>
+            <field name="email_from">{{object.env.company.email}}</field>
+            <field name="email_to">{{object.partner_id.email}}</field>
+            <field name="subject">Purchase Order Confirmed</field>
+            <field name="body_html" type="html">
+                <div>
+                    <div>
+                        Hello,<t t-out="object.partner_id.name"/>
+                        <br/>
+                        Please Check the new Purchase Order <t t-out="object.name"/>
+                        <br/>
+                        The Amount Total is <t t-out="object.amount_total" t-options='{"widget": "monetary", "display_currency": object.env.company.currency_id}'/>
+                        <br/>
+                        Please fulfill this order as soon as possible
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

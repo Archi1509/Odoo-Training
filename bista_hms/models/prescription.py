@@ -28,12 +28,10 @@ class HmsPrescription(models.Model):
         template_id = self.env.ref('bista_hms.action_prescription_report')
         return template_id.report_action(self)
 
-
     @api.depends('prescription_lines.move_ids')
     def _compute_count_deliveries(self):
         for record in self:
             record.delivery_count=self.env['stock.move'].search_count([('prescription_line_id','=',record.id)])
-
 
     def action_create_delivery(self):
         picking_vals=self.prepare_picking_vals()

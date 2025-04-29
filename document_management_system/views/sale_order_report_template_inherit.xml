@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="sale_order_inherit2"  inherit_id="document_management_system.sale_order_inherit">
+            <xpath expr="//table[@id='table1']//tr[@id='tr1']//td[@id='heading2']" position="replace">
+                <td><strong>Products Lines:</strong></td>
+            </xpath>
+        </template>
+    </data>
+</odoo>

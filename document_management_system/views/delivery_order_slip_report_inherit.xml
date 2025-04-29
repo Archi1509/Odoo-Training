@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="stock_report_delivery_inherit"  inherit_id="stock.report_delivery_document">
+            <xpath expr="//div[hasclass('page')]" position="inside">
+                <div class="Table1">
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th>Document</th>
+                                <th>Tags</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.document_ids" t-as="docs">
+                                <td><span t-esc="docs.name"/></td>
+                                <td><span t-esc="docs.tag_ids.name"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

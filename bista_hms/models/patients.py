@@ -116,9 +116,6 @@ class ResPatient(models.Model):
             record.appointment_count=self.env['hms.appointment'].search_count([('patient_id','in',record.ids)])
 
 
-
-
-
     def action_get_appointment_count(self):
         form_view_id = self.env.ref('bista_hms.hms_appointment_form_view').id
         list_view_id = self.env.ref('bista_hms.hms_appointment_list_view').id

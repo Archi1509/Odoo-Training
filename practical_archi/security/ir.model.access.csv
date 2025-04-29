@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+practical_archi.access_sale_pharmacy_admin,practical_archi.access_sale_pharmacy_admin,practical_archi.model_sale_pharmacy,practical_archi.group_admin_sale_pharmacy,1,1,1,0
+practical_archi.access_sale_pharmacy_user,practical_archi.access_sale_pharmacy_user,practical_archi.model_sale_pharmacy,practical_archi.group_user_sale_pharmacy,1,0,0,0
+practical_archi.access_custom_wizard_admin,access_custom_wizard_admin,practical_archi.model_custom_wizard,,1,1,1,1
+

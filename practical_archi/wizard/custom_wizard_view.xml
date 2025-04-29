@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="custom_wizard_form" model="ir.ui.view">
+        <field name="name">custom.wizard.form</field>
+        <field name="model">custom.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="product_ids" widget="many2many_tags" string="Product"/>
+                </sheet>
+                <footer>
+                    <button name="action_add_product" type="object" class="btn-primary" string="Add"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_custom_wizard" model="ir.actions.act_window">
+        <field name="name">Add Products</field>
+        <field name="res_model">custom.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="practical_archi.model_sale_order"/>
+        <field name="binding_view_types">form</field>
+    </record>
+</odoo>

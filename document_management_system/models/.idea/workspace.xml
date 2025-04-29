@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6aedfd77-5258-4fab-9e56-1d8efa59fbbf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../RMA/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../RMA/__manifest__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_crm/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_crm/__manifest__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_crm/models/sale_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_crm/models/sale_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_crm/security/ir.model.access.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_crm/security/ir.model.access.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_crm/views/stage_percentage_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_crm/views/stage_percentage_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_hms/models/appointment.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_hms/models/appointment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_hms/models/patients.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_hms/models/patients.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_hms/models/sale_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_hms/models/sale_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_hms/views/appointment_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_hms/views/appointment_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_hms/views/prescription_report_template.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_hms/views/prescription_report_template.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_hms/views/report.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_hms/views/report.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_sale/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_sale/__manifest__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_sale/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_sale/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_sale/models/res_config_setting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_sale/models/res_config_setting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_sale_approval/__manifest__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_sale_approval/__manifest__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_sale_approval/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_sale_approval/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_sale_approval/models/sale_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_sale_approval/models/sale_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../bista_sale_approval/views/sale_order_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../bista_sale_approval/views/sale_order_view.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2wFNxCVBQTOUI8vnGwpanN8j6CX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "odoo",
+    "last_opened_file_path": "/home/archi/workspace/18"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-348a24fa61fa-5312c7369657-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.23774.444" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6aedfd77-5258-4fab-9e56-1d8efa59fbbf" name="Changes" comment="" />
+      <created>1745633605635</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1745633605635</updated>
+    </task>
+    <servers />
+  </component>
+</project>

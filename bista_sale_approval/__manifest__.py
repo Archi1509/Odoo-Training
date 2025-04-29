@@ -11,6 +11,7 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/sale_order_view.xml',
+        'views/res_config_settings.xml'
 
     ],
     'installable': True,

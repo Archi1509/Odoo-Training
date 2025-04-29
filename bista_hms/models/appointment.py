@@ -12,7 +12,7 @@ class HmsAppointment(models.Model):
 
     appointment_code = fields.Char(string="Appointment ID")
     phone = fields.Char(string="Phone")
-    patient_id=fields.Many2one("res.patient",string='Patient',required='True')
+    patient_id=fields.Many2one("res.patient",string='Patient',required=True)
     appointment_date=fields.Datetime(string='Date',required=True,default=datetime.now()+timedelta(hours=1))
     appointment_reason=fields.Text(string='Reason')
     state = fields.Selection([('draft', 'Draft'),
@@ -40,7 +40,7 @@ class HmsAppointment(models.Model):
 
     @api.model_create_multi
     def create(self, data_list):
-        res=super(HmsAppointment,self).create(data_list)
+        res = super(HmsAppointment,self).create(data_list)
         for record in res:
             record.appointment_code = self.env['ir.sequence'].next_by_code('hms.appointment')
         return res

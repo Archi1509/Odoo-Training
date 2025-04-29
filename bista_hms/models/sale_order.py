@@ -40,7 +40,7 @@ class SaleOrder(models.Model):
     #         for line in order.order_line:
     #             line.discount = total_discount
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals_list):
         partner_id = vals_list.get('partner_id')
         partner_details = self.env['res.partner'].browse(partner_id)

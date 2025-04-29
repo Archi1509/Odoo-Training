@@ -19,6 +19,6 @@
 
     <menuitem id="menu_probability_stage_sub"
               name="Probability Stage"
-              parent="crm.menu_crm_config_lead"
+              parent="crm.crm_menu_root"
               action="stage_percentage_action"/>
 </odoo>

@@ -1,0 +1,8 @@
+<odoo>
+  <data noupdate="0">
+    <record id="update_system_para" model="ir.config_parameter">
+      <field name="key">sale.update_document_button</field>
+      <field name="value">1</field>
+    </record>
+  </data>
+</odoo>

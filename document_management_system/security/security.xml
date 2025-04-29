@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.module.category" id="school_activity_groups">
+             <field name="name">Activity</field>
+             <field name="description">User access levels for DMS module</field>
+             <field name="parent_id" ref="base.module_category_sales"/>
+             <field name="sequence">10</field>
+    </record>
+
+    <record id="group_admin_school_acitivity" model="res.groups">
+        	<field name="name">School Admin</field>
+            <field name="category_id" ref="school_activity_groups"/>
+            <field name="implied_ids" eval="[(4, ref('document_management_system.group_user_school_acitivity'))]"/>
+            <field name="comment">Admin Rights</field>
+
+    </record>
+    <record id="group_user_school_acitivity" model="res.groups">
+        	<field name="name">School User</field>
+            <field name="category_id" ref="school_activity_groups"/>
+            <field name="comment">User Rights</field>
+    </record>
+
+    <data noupdate="1">
+        <record id="school_activity_user_rule" model="ir.rule">
+            <field name="name">School Activity Rule</field>
+            <field name="model_id" ref="model_student_activity"/>
+            <field name="domain_force">[( 1, '=', 1 )]</field>
+            <field name="groups" eval="[(4, ref('document_management_system.group_user_school_acitivity'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+        <record id="school_activity_admin_rule" model="ir.rule">
+            <field name="name"> School Activity Rule</field>
+            <field name="model_id" ref="model_student_activity"/>
+            <field name="domain_force">[( 1, '=', 1 )]</field>
+            <field name="groups" eval="[(4, ref('document_management_system.group_admin_school_acitivity'))]"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+    </data>
+</odoo>

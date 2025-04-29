@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="doc_tag_master_list_view" model="ir.ui.view">
+        <field name="name">doc.tag.master.list.view</field>
+        <field name="model">doc.tag.master</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+
+   <record id="doc_tag_master_action" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="res_model">doc.tag.master</field>
+        <field name="view_mode">list</field>
+   </record>
+
+
+    <menuitem id="doc_tag_master_sub_menu" name="Tag"
+    parent="document_custom_main_menu"
+    action="doc_tag_master_action"/>
+
+</odoo>

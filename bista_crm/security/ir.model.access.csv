@@ -1,7 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-bista_crm.access_stage_percentage,access_stage_percentage,bista_crm.model_stage_percentage,,1,1,1,1
-
-
+bista_crm.access_stage_percentage_admin,access_stage_percentage_admin,bista_crm.model_stage_percentage,sales_team.group_sale_manager,1,1,1,0
+bista_crm.access_stage_percentage_user,access_stage_percentage_user,bista_crm.model_stage_percentage,sales_team.group_sale_salesman,1,0,0,0
 
 
 

@@ -7,12 +7,11 @@
         <field name="arch" type="xml">
             <list>
                 <field name="appointment_code"/>
-                <field name="patient_id"/>
+                <field name="patient_id" />
                 <field name="appointment_date"/>
                 <field name="appointment_reason"/>
                 <field name="phone"/>
             </list>
-
         </field>
     </record>
 
@@ -33,9 +32,15 @@
                     <button name="action_cancel" string="Cancel" type="object"
                             invisible="state not in ('in_consultation','waiting')" class="btn-primary"/>
 
-                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,in_consultation,done"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,in_consultation,done" />
                 </header>
                 <sheet>
+                    <widget name="web_ribbon" title="Confirmed" invisible="state != 'confirm'"/>
+                    <widget name="web_ribbon" title="Draft" invisible="state != 'draft'"/>
+                    <widget name="web_ribbon" title="in_consultation" invisible="state != 'in_consultation'"/>
+                    <widget name="web_ribbon" title="done" invisible="state != 'done'"/>
+                    <widget name="web_ribbon" title="cancel" invisible="state != 'cancel'"/>
+
                     <div class="oe_title">
                         <h1>
                             <field name="appointment_code" readonly="1"/>
@@ -43,11 +48,11 @@
                     </div>
                     <group>
                         <group>
-                            <field name="patient_id"  context="{'show_phone':1}" options="{'always_reload' : True}"/>
+                            <field name="patient_id"  context="{'show_phone':1}" options="{'always_reload' : True, 'no_quick_create': True, 'no_create_edit' : True}" />
                             <field name="appointment_date"/>
                             <field name="appointment_reason"/>
                             <field name="phone"/>
-                            <field name="product" domain="[('type', '=', 'service')]"/>
+                            <field name="product" domain="[('type', '=', 'service')]" options="{'no_quick_create': True, 'no_create_edit' : True}"/>
                         </group>
                         <group>
                             <field name="guardian_id" context="{'show_address':1}" options="{'always_reload': True}"/>
@@ -62,7 +67,6 @@
                 </sheet>
                 <chatter/>
             </form>
-
         </field>
     </record>
 
@@ -70,6 +74,27 @@
         <field name="name">Appointment</field>
         <field name="res_model">hms.appointment</field>
         <field name="view_mode">list,form</field>
+    </record>
+    <record id="appointment_view_search_panel" model="ir.ui.view">
+        <field name="name">hms.appointment</field>
+        <field name="model">hms.appointment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id" filter_domain="['|', '|', ('patient_id.phone','ilike',self), ('patient_id.email','ilike',self),('patient_id.age','ilike',self)]" string="Patient"/>
+                <field name="appointment_code"/>
+                <field name="appointment_reason"/>
+                <filter string="Draft" name="state" domain="[('state', '=','draft')]"/>
+                <filter string="Confirm" name="state" domain="[('state', '=','confirm')]"/>
+                <filter string="Cancel" name="state" domain="[('state', '=','cancel')]"/>
+                <filter string="In Consultation" name="state" domain="[('state', '=','in_consultation')]"/>
+                <group expand="0" string="Group By">
+                            <filter string="Date" name="appointment_date" domain="[]" context="{'group_by':'appointment_date'}"/>
+                            <filter string="Status" name="state" domain="[]" context="{'group_by':'state'}"/>
+                            <filter string="Name" name="patient_id" domain="[]" context="{'group_by':'patient_id'}"/>
+                </group>
+                <separator/>
+            </search>
+        </field>
     </record>
 
     <menuitem id="menu_bista_hms" name="HMS"/>

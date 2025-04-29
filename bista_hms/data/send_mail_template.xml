@@ -6,6 +6,8 @@
         <field name="email_from">{{object.env.user.email}}</field>
         <field name="email_to">{{object.doctor_id.email}}</field>
         <field name="subject">Your Todays Appointments</field>
+<!--        <field name="report_template" ref="bista_hms.prescription_template"/>-->
+<!--        <field name="report_name">{{object.env.user.id}}</field>-->
         <field name="body_html" type="html">
             <div>
                 <p>Dear<strong> <t t-out="object.doctor_id.name"/> </strong>,

@@ -7,7 +7,7 @@ from odoo.exceptions import UserError, ValidationError
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    stage_percentage = fields.Many2one("stage.percentage",string="Stage Percentage",related = 'opportunity_id.stage_percentage',store=True)
+    stage_percentage = fields.Many2one("stage.percentage",string="Stage Percentage")
 
     def action_confirm(self):
         if self.opportunity_id:

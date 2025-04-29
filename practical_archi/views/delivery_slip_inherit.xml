@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="stock_report_delivery_inherit2"  inherit_id="stock.report_delivery_document">
+            <xpath expr="//div[@id='informations']//div[@name='div_sched_date']" position="after">
+                <strong>Responsible:</strong><t t-esc="o.user_id.id"/>
+            </xpath>
+            <xpath expr="//div[hasclass('page')]" position="after">
+                <strong>Note:</strong><t t-esc="o.note"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

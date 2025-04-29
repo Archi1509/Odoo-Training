@@ -9,7 +9,6 @@
     'depends':['base','sale','account'],
     'data':[
         'security/ir.model.access.csv',
-
         'wizard/rma_wizard_view.xml',
         'views/sale_rma_view.xml',
         'views/sale_rma_line_view.xml',

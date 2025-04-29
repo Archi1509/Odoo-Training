@@ -6,21 +6,46 @@ class SaleOrder(models.Model):
 
     state = fields.Selection(
         selection_add=[
-            ('to_approve', 'To Approve'),
+            ('to_approve', 'To Approve'),('sale','')
         ],
     )
 
     def action_approval(self):
-        self.write({'state': 'sale'})
-        return True
+        self.with_context(approved=True).action_confirm()
+
+    def _confirmation_error_message(self):
+        """ Return whether order can be confirmed or not if not then returm error message. """
+        self.ensure_one()
+        if self.state not in {'draft', 'sent','to_approve'}:
+            return ("Some orders are not in a state requiring confirmation.")
+        if any(
+            not line.display_type
+            and not line.is_downpayment
+            and not line.product_id
+            for line in self.order_line
+        ):
+            return ("A line on these orders missing a product, you cannot confirm it.")
+
+        return False
 
     def action_confirm(self):
-        res = super(SaleOrder,self).action_confirm
-        desired_group_name = self.env['res.groups'].search([('name','=','Sale Order User')])
-        is_desired_group = self.env.user.id in desired_group_name.users.ids
-        for order in self:
-            if order.amount_total > 5000 and is_desired_group:
-                order.write({'state': 'to_approve'})
-            else:
-                order.action_approval()
-        return res
+        if self._context.get('approved'):
+            super(SaleOrder, self).action_confirm()
+
+        else:
+            for order in self:
+                if order._approval_allowed():
+                    order.action_approval()
+                else:
+                    order.write({'state': 'to_approve'})
+
+    def _approval_allowed(self):
+        """Returns whether the order qualifies to be approved by the current user"""
+        self.ensure_one()
+        return (
+                self.company_id.so_double_validation == 'one_step'
+                or (self.company_id.so_double_validation == 'two_step'
+                    and self.amount_total < self.env.company.currency_id._convert(
+                    self.company_id.so_double_validation_amount, self.currency_id, self.company_id,
+                    self.date_order or fields.Date.today()))
+                or self.env.user.has_group('sales_team.group_sale_manager'))
