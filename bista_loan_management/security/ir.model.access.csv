@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+bista_loan_management.access_bista_loan_manager,access_bista_loan_manager,bista_loan_management.model_bista_loan,bista_loan_management.group_loan_team_admin,1,1,1,1
+bista_loan_management.access_bista_loan_user,access_bista_loan_user,bista_loan_management.model_bista_loan,,1,1,1,1
+bista_loan_management.access_emi_line,access_emi_line,bista_loan_management.model_emi_line,,1,1,1,1
+bista_loan_management.access_interest_rate,access_interest_rate,bista_loan_management.model_interest_rate,,1,1,1,1
+bista_loan_management.access_approval_team,access_approval_team,bista_loan_management.model_approval_team,base.group_user,1,1,1,1
+bista_loan_management.access_team_approval_level,access_team_approval_level,bista_loan_management.model_team_approval_level,base.group_user,1,1,1,1
+bista_loan_management.access_loan_approval_level,access_loan_approval_level,bista_loan_management.model_loan_approval_level,base.group_user,1,1,1,1
+

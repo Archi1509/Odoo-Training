@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="loan_view_list_view" model="ir.ui.view">
+    		<field name="name">loan.view.list.view</field>
+    		<field name="model">bista.loan</field>
+    		<field name="arch" type="xml">
+        		<list>
+                    <field name="principal_loan_amount"/>
+                    <field name="partner_id"/>
+                    <field name="loan_tenure" placeholder="In Months"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="emi_date"/>
+                    <field name="emi_amount"/>
+                    <field name="total_interest_amount"/>
+                    <field name="paid_principal_amount"/>
+                    <field name="pending_principal_amount"/>
+                    <field name="next_emi_date"/>
+        		</list>
+    		</field>
+    </record>
+    <record id="loan_view_form_view" model="ir.ui.view">
+    		<field name="name">loan.view.form.view</field>
+    		<field name="model">bista.loan</field>
+    		<field name="arch" type="xml">
+        		<form>
+<!--                    groups="bista_loan_management.group_loan_team_admin"-->
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved,rejected"  />
+                        <button name="action_calculate_emi_line" class="btn-primary" type="object" string="Calculate Emi"/>
+                        <button name="action_confirm" class="btn-primary" type="object" string="Confirm" invisible="state not in 'draft'"/>
+                        <button name="action_to_approve" class="btn-primary" type="object" string="Approve" invisible="state != 'to_approve' or current_user_id not in next_approver" />
+                        <button name="action_reject" class="btn-primary" type="object" string="Reject" invisible="state not in 'to_approve' or current_user_id not in next_approver" />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="view_invoice" class="oe_start_button" icon="fa-solid fa-calendar" >
+                                <field string="Invoice" name="invoice_ids" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group string="Basic Details">
+                                <field name="principal_loan_amount"/>
+                                <field name="partner_id"/>
+                                <field name="loan_tenure"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="user_id"/>
+                                <field name="current_user_id"/>
+                            </group>
+                            <group string="Loan Details">
+                                <field name="emi_date"/>
+                                <field name="emi_amount"/>
+                                <field name="next_emi_date"/>
+                                <field name="total_interest_amount"/>
+                                <field name="paid_principal_amount"/>
+                                <field name="pending_principal_amount"/>
+                                <field name="rate" readonly="1"/>
+                            </group>
+                            <group string="Approval Details" invisible="state in 'draft'">
+                                <field name="approver_team" force_save="1"/>
+                                <field name="next_approver" widget="many2many_tags" invisible="state  in ('approved','rejected')"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Interest Rate" >
+                                <field name="interest_rates"/>
+                            </page>
+                            <page string="EMI Line">
+                                <field name="emi_lines">
+                                    <list string="Emi" decoration-success="state == 'invoice_paid'" decoration-danger="state == 'invoice generated'">
+                                        <field name="date"/>
+                                        <field name="interest_charged"/>
+                                        <field name="principal_paid"/>
+                                        <field name="total_payment"/>
+                                        <field name="balance"/>
+                                        <field name="state" />
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Approval Levels">
+                                <field name="approval_levels" force_save="1">
+                                    <list editable="bottom">
+                                        <field name="level"/>
+                                        <field name="name"/>
+                                        <field name="user_ids" widget="many2many_tags"/>
+                                        <field name="stage"/>
+                                        <field name="approved_by"/>
+                                        <field name="rejected_by" />
+                                        <field name="timestamp" />
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+        		</form>
+    		</field>
+    </record>
+    <record id="action_bista_loan" model="ir.actions.act_window">
+	  <field name="name">Loan</field>
+	  <field name="res_model">bista.loan</field>
+	  <field name="view_mode">list,form</field>
+	</record>
+
+    <menuitem id="menu_bista_loan"
+          name="Loan"
+          sequence="1"/>
+
+	<menuitem id="menu_loan"
+		  name="Loan"
+		  parent="menu_bista_loan"
+          action ="action_bista_loan"
+		  sequence="2"/>
+</odoo>

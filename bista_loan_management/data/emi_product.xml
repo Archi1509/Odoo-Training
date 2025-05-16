@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="product.template" id="product_emi">
+        <field name="name">EMI2</field>
+        <field name="type">service</field>
+    </record>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="group_loan_admin" model="res.groups">
+        	<field name="name">Admin</field>
+    </record>
+    <record id="group_loan_user" model="res.groups">
+        	<field name="name">Loan User</field>
+    </record>
+    <record id="group_loan_team_admin" model="res.groups">
+<!--            <field name="implied_ids" eval="[(4, ref('bista_loan_management.group_loan_user'))]"/>-->
+        	<field name="name">Loan Team Admin</field>
+    </record>
+
+
+    <record id="bista_loan_management_loan_user" model="ir.rule">
+        <field name="name">Loan Management Rule</field>
+        <field name="model_id" ref="model_bista_loan"/>
+        <field name="domain_force">[(1, '=', 1 )]</field>
+        <field name="groups" eval="[(4, ref('bista_loan_management.group_loan_user'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="bista_loan_management_loan_manager" model="ir.rule">
+        <field name="name">Loan Management Rule</field>
+        <field name="model_id" ref="model_bista_loan"/>
+        <field name="domain_force">['|','|',('next_approver', 'in', user.id),('user_id','=',user.id),(1,'=',1)]</field>
+        <field name="groups" eval="[(4, ref('bista_loan_management.group_loan_team_admin'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="bista_loan_management_loan_team" model="ir.rule">
+        <field name="name">Loan Management Rule</field>
+        <field name="model_id" ref="model_bista_loan"/>
+        <field name="domain_force">[(1, '=', 1 )]</field>
+        <field name="groups" eval="[(4, ref('bista_loan_management.group_loan_admin'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--Template to send demo mail template for the customer-->
+        <record id="loan_mail_template" model="mail.template">
+            <field name="name">Loan EMI Mail Template</field>
+            <field name="model_id" ref="bista_loan_management.model_bista_loan"/>
+            <field name="email_from">{{object.env.user.email}}</field>
+            <field name="email_to">{{object.partner_id.email}}</field>
+            <field name="subject">Notification Monthly EMI Payment</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <div >
+                        <h2>
+                            Hi,
+                            <t t-out="object.partner_id.name"/>
+                        </h2>
+                    </div>
+                    <br/>
+                        <p>Your EMI Payment Date for this month is <strong><t t-out="object.emi_date"/></strong>, Please pay the monthly EMI,</p>
+                    <br/>
+                    Regards,
+                    <br/>
+                    <t t-out="object.env.user"/>
+                    <br/>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>
