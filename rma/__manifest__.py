@@ -1,10 +1,10 @@
 {
-    'name':'RMA',
+    'name':'rma',
     'author':'Archi',
     'version':'0.1',
     'sequence':'-10',
-    'summery':'RMA System',
-    'description':'RMA System',
+    'summery':'rma System',
+    'description':'rma System',
     'category':'Management',
     'depends':['base','sale','account'],
     'data':[

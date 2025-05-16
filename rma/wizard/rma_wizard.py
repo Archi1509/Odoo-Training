@@ -6,7 +6,7 @@ class RMAWizard(models.TransientModel):
     _name = 'rma.wizard'
     _description = 'Wizard View'
 
-    rma_line = fields.One2many("rma.line.wizard","line_id",string="RMA Lines")
+    rma_line = fields.One2many("rma.line.wizard","line_id",string="rma Lines")
 
 
     def action_process(self):
@@ -68,7 +68,7 @@ class RMALineWizard(models.TransientModel):
     _name = "rma.line.wizard"
 
     product_id = fields.Many2one('product.product', string='Product')
-    rma_line_id = fields.Many2one('sale.rma.line', string="RMA Line")
+    rma_line_id = fields.Many2one('sale.rma.line', string="rma Line")
     sale_order_quantity = fields.Float(string='Ordered Quantity' ,readonly=True)
     quantity = fields.Float(string='To Receive',store=True, compute = "_compute_to_receive",readonly= False )
     line_id =fields.Many2one("rma.wizard")

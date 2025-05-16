@@ -2,7 +2,7 @@ from odoo import fields,models,api
 
 class TeamRMA(models.Model):
     _name = "team.rma"
-    _description = "Teams RMA"
+    _description = "Teams rma"
     _rec_name = "team_name"
 
     team_name = fields.Char("Team Name")

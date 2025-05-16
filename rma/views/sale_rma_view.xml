@@ -26,6 +26,9 @@
                     <group>
                         <field name="team_id" required="True"/>
                         <field name="date"/>
+                    </group>
+                    <group>
+                        <field name="customer_id"/>
                         <field name="sale_order_id"/>
                     </group>
                     <notebook>

@@ -2,7 +2,7 @@ from odoo import fields,models,api
 
 class SaleRMALine(models.Model):
     _name = "sale.rma.line"
-    _description = "RMA Line"
+    _description = "rma Line"
     _rec_name = "product_id"
 
     product_id = fields.Many2one("product.product",string="Product")
@@ -10,8 +10,8 @@ class SaleRMALine(models.Model):
     unit_price = fields.Float(string="Unit Price")
     to_receive = fields.Float(string="To Receive",compute="_compute_qty",store=True) #Qty User want to return
     received_qty = fields.Float(string="Received Quantity",compute="_compute_qty",store=True)
-    sale_rma_id = fields.Many2one('sale.rma',string="Sale RMA ID")
-    invoice_line_ids = fields.One2many("account.move.line", 'rma_line_id', string="Sale RMA Line IDS")
+    sale_rma_id = fields.Many2one('sale.rma',string="Sale rma ID")
+    invoice_line_ids = fields.One2many("account.move.line", 'rma_line_id', string="Sale rma Line IDS")
     move_ids=fields.One2many("stock.move","rma_line_id","Delivery")
     invoice_ids = fields.One2many("account.move",'sale_rma_invoice_id','Invoice')
     invoiced_qty = fields.Float(string="Invoiced Quantity",compute="_compute_invoiced_qty",store=True)

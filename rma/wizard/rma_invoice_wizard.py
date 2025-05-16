@@ -63,7 +63,7 @@ class RMAInvoiceWizardLine(models.TransientModel):
     _description = "Invoice Wizard Line"
 
     product_id = fields.Many2one('product.product', string='Product')
-    rma_line_id = fields.Many2one('sale.rma.line', string="RMA Line")
+    rma_line_id = fields.Many2one('sale.rma.line', string="rma Line")
     sale_order_quantity = fields.Float(string='Ordered Quantity', readonly=True)
     to_invoice = fields.Float(string="To Invoice")
     rma_invoice_wizard_id = fields.Many2one("rma.invoice.wizard")

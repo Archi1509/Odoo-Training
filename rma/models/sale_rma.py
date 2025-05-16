@@ -4,10 +4,10 @@ from odoo import fields,models,api
 from odoo.exceptions import UserError
 class SaleRMA(models.Model):
     _name = "sale.rma"
-    _description = "Sale RMA"
+    _description = "Sale rma"
     _rec_name = "rma_id"
 
-    rma_id = fields.Char(string="RMA ID",default="New")
+    rma_id = fields.Char(string="rma ID",default="New")
     team_id = fields.Many2one("team.rma",string = "Team")
     date = fields.Date("Date")
     sale_order_id = fields.Many2one("sale.order", string = "Order")
@@ -16,6 +16,7 @@ class SaleRMA(models.Model):
     invoice_ids = fields.One2many("account.move", 'sale_rma_invoice_id', string="Invoiced")
     delivery_count=fields.Integer(string="Count",compute="_compute_count_deliveries",store=True)
     invoice_count=fields.Integer(string="Count",compute="_compute_count_invoices",store=True)
+    customer_id = fields.Many2one('res.partner',string='Customer')
 
 
     @api.onchange('sale_order_id')
@@ -37,7 +38,7 @@ class SaleRMA(models.Model):
             if rec['team_id']:
                 team = self.env['team.rma'].browse(rec['team_id'])
                 prefix = team.prefix
-                seq_name = f'Sale RMA {team.team_name}'
+                seq_name = f'Sale rma {team.team_name}'
                 seq_code = f'sale.rma.{team.id}'
 
                 if not self.env['ir.sequence'].search([('code', '=', seq_code)], limit=1):
@@ -51,7 +52,7 @@ class SaleRMA(models.Model):
         return super(SaleRMA, self).create(vals_list)
 
     def action_open_wizard(self):
-        view_id = self.env.ref('RMA.rma_wizard_form').id
+        view_id = self.env.ref('rma.rma_wizard_form').id
         rma_line =[]
         for line in self.sale_rma_line:
             rma_line.append((0,0,{
@@ -98,7 +99,7 @@ class SaleRMA(models.Model):
             record.delivery_count = self.env['stock.move'].search_count([('rma_line_id', '=', record.id)])
 
     def action_open_invoice_wizard(self):
-        view_id = self.env.ref('RMA.rma_invoice_wizard_form').id
+        view_id = self.env.ref('rma.rma_invoice_wizard_form').id
         self.sale_rma_line._compute_invoiced_qty()
         rma_invoice_line = []
         for line in self.sale_rma_line:
