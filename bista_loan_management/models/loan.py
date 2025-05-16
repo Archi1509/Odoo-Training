@@ -28,7 +28,7 @@ class Loan(models.Model):
     approval_levels = fields.One2many('loan.approval.level','loan_id',string='Approval Levels')
     approver_team = fields.Many2one('approval.team',string='Approver Team')
     next_approver = fields.Many2many('res.users',string='Next Approver',compute='_compute_get_next_approver',store=True)
-    state = fields.Selection([('draft', 'Draft'),('to_approve','To Approve'),('approved','Approved'),('rejected','Rejected')],string="Status",default='draft')
+    state = fields.Selection([('draft', 'Draft'),('to_approve','To Approve'),('approved','Approved'),('rejected','Rejected')],string="Status",default='draft',copy=False)
     current_user_id = fields.Many2one('res.users',compute='_compute_current_user')
 
     def _compute_current_user(self):

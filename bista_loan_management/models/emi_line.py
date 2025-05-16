@@ -12,7 +12,7 @@ class EmiLine(models.Model):
     date = fields.Date('Month')
     loan_id = fields.Many2one('bista.loan',string='Loan')
     state = fields.Selection([('pending','Pending'),('invoice generated','Invoice Generated'),('invoice_paid','Invoice Paid')]
-                             ,default ='pending')
+                             ,default ='pending',copy=False)
     invoice_id = fields.One2many('account.move','loan_id',string='Invoice')
 
 

@@ -8,7 +8,7 @@ class LoanApprovalLevel(models.Model):
     level = fields.Integer('Team Name',compute='_compute_level',store=True,readonly=True)
     name = fields.Char('Name')
     user_ids = fields.Many2many('res.users')
-    stage = fields.Selection([('pending','Pending'),('to approve','To Approve'),('approved','Approved'),('rejected','Rejected')], default='pending')
+    stage = fields.Selection([('pending','Pending'),('to approve','To Approve'),('approved','Approved'),('rejected','Rejected')], default='pending',copy=False)
     approved_by = fields.Char(string='Approved By')
     rejected_by = fields.Char(string='Rejected By')
     timestamp = fields.Datetime('Timestamp')
