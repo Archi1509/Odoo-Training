@@ -9,7 +9,7 @@ class Loan(models.Model):
     _rec_name = 'partner_id'
 
     principal_loan_amount = fields.Float("Loan Amount")
-    partner_id = fields.Many2one('res.partner',string="Partner")
+    partner_id = fields.Many2one('res.partner',string="Partner",required=True)
     loan_tenure = fields.Integer('Loan Tenure(Loan Period)')
     interest_rates = fields.One2many('interest.rate','loan_id',string='Interest Rate')
     emi_lines = fields.One2many('emi.line','loan_id',string='Interest Rate')
