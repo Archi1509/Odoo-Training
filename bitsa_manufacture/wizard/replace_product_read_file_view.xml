@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="replace_product_read_file_view" model="ir.ui.view">
+        <field name="name">replace.product.read.file.view</field>
+        <field name="model">replace.product.read.file</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="mo_number_id"/>
+                <field name="current_product"/>
+                <field name="new_product"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+<!--    <record id="menu_update_product_serial_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Update Product Serial</field>-->
+<!--        <field name="res_model">update.product.serial</field>-->
+<!--        <field name="view_mode">form</field>-->
+<!--        <field name="view_id" ref="update_product_serial_form_view"/>-->
+<!--        <field name="target">new</field>-->
+<!--    </record>-->
+
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="manufacture_report_form_view" model="ir.ui.view">
+        <field name="name">manufacture.report.form.view</field>
+        <field name="model">manufacture.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="start_date" required="1"/>
+                            <field name="end_date" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="download_manufacture_report" type="object" class="oe_highlight" icon="fa-download" string="Download"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="menu_manufacture_action" model="ir.actions.act_window">
+        <field name="name">Manufacture Report</field>
+        <field name="res_model">manufacture.report</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="manufacture_report_form_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_manufacture_report" name="Manufacture Report" parent="mrp.menu_mrp_reporting" action="menu_manufacture_action"/>
+
+</odoo>

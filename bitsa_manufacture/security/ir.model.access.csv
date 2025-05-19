@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+bitsa_manufacture.access_add_serial,access_add_serial,bitsa_manufacture.model_add_serial,,1,1,1,1
+bitsa_manufacture.access_manufacture_report,access_manufacture_report,bitsa_manufacture.model_manufacture_report,base.group_user,1,1,1,1
+bitsa_manufacture.access_update_product_serial,access_update_product_serial,bitsa_manufacture.model_update_product_serial,base.group_user,1,1,1,1
+bitsa_manufacture.access_replace_product_read_file,access_replace_product_read_file,bitsa_manufacture.model_replace_product_read_file,base.group_user,1,1,1,1
+bitsa_manufacture.access_replace_serial_read_file,access_replace_serial_read_file,bitsa_manufacture.model_replace_serial_read_file,base.group_user,1,1,1,1
+
+
+

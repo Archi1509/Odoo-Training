@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report
+        id ="action_manufacture_report_xlsx"
+        string ="Manufacture Report"
+        model ="manufacture.report"
+        report_type ="xlsx"
+        file = "bitsa_manufacture.report_manufacture_xlsx"
+        name="bitsa_manufacture.report_manufacture_xlsx"
+        print_report_name ="Manufacture Report"
+        />
+</odoo>
